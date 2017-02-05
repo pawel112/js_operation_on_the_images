@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>WPO</title>
+	<link rel="stylesheet" type="text/css" href="css/menu.css">
+  <link rel="stylesheet" type="text/css" href="css/table.css">
+</head>
+
+<body>
+<div class="dropdown" id="menu">
+<button onclick="menu_function()" class="dropbtn">Menu</button>
+  <div id="myDropdown" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput" onkeyup="filter_function()">
+    <a href="#" id="menu_choose1">Actions arithmetic summation gray images</a>
+    <a href="#" id="menu_choose2">Actions arithmetic summation color images</a>
+  </div>
+</div>
+
+<div class="dropdown" id="menu1">
+<button onclick="menu_function1()" class="dropbtn">Choice</button>
+  <div id="myDropdown1" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput1" onkeyup="filter_function1()">
+    <a href="#" id="menu_choose11">Summation (specified) constant with the image and the two images</a>
+  </div>
+</div>
+
+<div class="dropdown" id="menu2">
+<button onclick="menu_function2()" class="dropbtn">Choice</button>
+  <div id="myDropdown2" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput2" onkeyup="filter_function2()">
+    <a href="#" id="menu_choose21">Summation (specified) constant with the image and the two images</a>
+  </div>
+</div>
+
+<div class="dropdown" id="menu_options">
+<button onclick="menu_function_options()" class="dropbtn">Options</button>
+  <div id="myDropdown_options" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput_options" onkeyup="filter_function_options()">
+    <a href="#" id="menu_choose_o1">Fixed number</a>
+    <a href="#" id="menu_choose_o2">Image by image</a>
+  </div>
+</div>
+
+<table>
+	<tr>
+		<td>Image 1:</td>
+		<td><input type="file" id="file1"></td>
+		<td><input type="button" value="Reset" onclick="clear_file1();"></td>
+    <td><input type="button" value="Normalize image" onclick="normalization (image1_a);" id="button_normalize1"></td>
+	</tr>
+	<tr>
+		<td>Image 2:</td>
+		<td><input type="file" id="file2"></td>
+		<td><input type="button" value="Reset" onclick="clear_file2();"></td>
+    <td></td>
+	</tr>
+</table>
+
+<br/><br/>
+<table>
+	<tr>
+		<td>Image 1:</td>
+		<td>Image 2:</td>
+	</tr>
+	<tr>
+		<td><canvas id="image1" width="0" height="0"></canvas></td>
+		<td><canvas id="image2" width="0" height="0"></canvas></td>
+	</tr>
+	<tr>
+		<td>Result image:</td>
+    <td>Image 1 histogram:</td>
+	</tr>
+	<tr>
+		<td><canvas id="image1_a" width="0" height="0"></canvas></td>
+    <td><canvas id="image1_h" width="280" height="170"></canvas></td>
+	</tr>
+</table>
+
+<script src="js/images.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/pixels.js"></script>
+<script src="js/algorithms.js"></script>
+<!--<script src="js/in.js"></script>-->
+</body>
+</html>	
