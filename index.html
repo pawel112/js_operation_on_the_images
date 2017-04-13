@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>WPO</title>
+	<title>Project</title>
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
   <link rel="stylesheet" type="text/css" href="css/table.css">
 </head>
@@ -14,6 +14,12 @@
     <input type="text" placeholder="Search.." id="myInput" onkeyup="filter_function()">
     <a href="#" id="menu_choose1">Actions arithmetic summation gray images</a>
     <a href="#" id="menu_choose2">Actions arithmetic summation color images</a>
+    <a href="#" id="menu_choose3">Geometric operations in the image</a>
+    <a href="#" id="menu_choose4">Gray image histogram operations</a>
+    <a href="#" id="menu_choose5">Color image histogram operations</a>
+    <a href="#" id="menu_choose6">Morphological operations on binary images</a>
+    <a href="#" id="menu_choose7">Morphological operations on gray images</a>
+	<a href="#" id="menu_choose8">Linear and nonlinear filtering</a>
   </div>
 </div>
 
@@ -22,6 +28,9 @@
   <div id="myDropdown1" class="dropdown-content">
     <input type="text" placeholder="Search.." id="myInput1" onkeyup="filter_function1()">
     <a href="#" id="menu_choose11">Summation (specified) constant with the image and the two images</a>
+    <a href="#" id="menu_choose12">Pow image (with fixed number)</a>
+    <a href="#" id="menu_choose13">Image sqrt</a>
+	<a href="#" id="menu_choose14">Log image</a>
   </div>
 </div>
 
@@ -30,6 +39,69 @@
   <div id="myDropdown2" class="dropdown-content">
     <input type="text" placeholder="Search.." id="myInput2" onkeyup="filter_function2()">
     <a href="#" id="menu_choose21">Summation (specified) constant with the image and the two images</a>
+    <a href="#" id="menu_choose22">Pow image (with fixed number)</a>
+    <a href="#" id="menu_choose23">Image sqrt</a>
+	<a href="#" id="menu_choose24">Log image</a>
+  </div>
+</div>
+
+<div class="dropdown" id="menu3">
+<button onclick="menu_function3()" class="dropbtn">Choice</button>
+  <div id="myDropdown3" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput3" onkeyup="filter_function3()">
+    <a href="#" id="menu_choose31">Moving image with given vector</a>
+    <a href="#" id="menu_choose32">Cutting fragment of an image</a>
+    <a href="#" id="menu_choose33">Copying fragment of image</a>
+  </div>
+</div>
+
+<div class="dropdown" id="menu4">
+<button onclick="menu_function4()" class="dropbtn">Choice</button>
+  <div id="myDropdown4" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput4" onkeyup="filter_function4()">
+    <a href="#" id="menu_choose41">Calculating the histogram</a>
+    <a href="#" id="menu_choose42">Moving the histogram</a>
+    <a href="#" id="menu_choose43">Stretching the histogram</a>
+    <a href="#" id="menu_choose44">Local scaling</a>
+  </div>
+</div>
+
+<div class="dropdown" id="menu5">
+<button onclick="menu_function5()" class="dropbtn">Choice</button>
+  <div id="myDropdown5" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput5" onkeyup="filter_function5()">
+    <a href="#" id="menu_choose51">Calculating the histogram</a>
+    <a href="#" id="menu_choose52">Moving the histogram</a>
+    <a href="#" id="menu_choose53">Stretching the histogram</a>
+    <a href="#" id="menu_choose54">Local scaling</a>
+  </div>
+</div>
+
+<div class="dropdown" id="menu6">
+<button onclick="menu_function6()" class="dropbtn">Choice</button>
+  <div id="myDropdown6" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput6" onkeyup="filter_function6()">
+    <a href="#" id="menu_choose61">Erosion</a>
+    <a href="#" id="menu_choose62">Dilatation</a>
+  </div>
+</div>
+
+<div class="dropdown" id="menu7">
+<button onclick="menu_function7()" class="dropbtn">Choice</button>
+  <div id="myDropdown7" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput7" onkeyup="filter_function7()">
+    <a href="#" id="menu_choose71">Erosion</a>
+    <a href="#" id="menu_choose72">Dilatation</a>
+  </div>
+</div>
+
+<div class="dropdown" id="menu8">
+<button onclick="menu_function8()" class="dropbtn">Choice</button>
+  <div id="myDropdown8" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput8" onkeyup="filter_function8()">
+    <a href="#" id="menu_choose81">Low-pass filters</a>
+    <a href="#" id="menu_choose82">High-pass filters</a>
+    <a href="#" id="menu_choose83">Median filter</a>
   </div>
 </div>
 
@@ -39,6 +111,24 @@
     <input type="text" placeholder="Search.." id="myInput_options" onkeyup="filter_function_options()">
     <a href="#" id="menu_choose_o1">Fixed number</a>
     <a href="#" id="menu_choose_o2">Image by image</a>
+  </div>
+</div>
+
+<div class="dropdown" id="menu_options2">
+<button onclick="menu_function_options2()" class="dropbtn">Options</button>
+  <div id="myDropdown_options2" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput_options2" onkeyup="filter_function_options2()">
+    <a href="#" id="menu_choose_o21">Averaging filter</a>
+    <a href="#" id="menu_choose_o22">LP1 filter</a>
+  </div>
+</div>
+
+<div class="dropdown" id="menu_options3">
+<button onclick="menu_function_options3()" class="dropbtn">Options</button>
+  <div id="myDropdown_options3" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput_options3" onkeyup="filter_function_options3()">
+    <a href="#" id="menu_choose_o31">Roberts filter</a>
+    <a href="#" id="menu_choose_o32">Vertical Prewitt filter</a>
   </div>
 </div>
 
@@ -81,6 +171,5 @@
 <script src="js/menu.js"></script>
 <script src="js/pixels.js"></script>
 <script src="js/algorithms.js"></script>
-<!--<script src="js/in.js"></script>-->
 </body>
 </html>	

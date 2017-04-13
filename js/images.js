@@ -101,36 +101,29 @@ function image_type (canvas1)
 		return -1;
 	}
 
-	asyncLoop(
-	{
-		length : 5,
-		functionToLoop : function(loop, i){
-			setTimeout(function(){
-				asyncLoop(
-				{
-					length : 5,
-					functionToLoop : function(loop, i){
-						setTimeout(function(){
-							var pixel = get_pixel (i, j, canvas1);
+	for (var i=0; i<canvas1.height; i++)
+    {
+        for (var j=0; j<canvas1.width; j++)
+        {
+            var pixel = get_pixel (i, j, canvas1);
             
-							if (!(((pixel[0] == 0) || (pixel[0] == 255)) && ((pixel[1] == 0) || (pixel[1] == 255)) && ((pixel[2] == 0) || (pixel[2] == 255))))
-							{
-								is_bin = 0;
-							}
+			if (!(((pixel[0] == 0) || (pixel[0] == 255)) && ((pixel[1] == 0) || (pixel[1] == 255)) && ((pixel[2] == 0) || (pixel[2] == 255))))
+			{
+				is_bin = 0;
+			}
 
-							if ((pixel[0] != pixel[1]) || (pixel[1] != pixel[2]))
-							{
-								is_gray = 0;
-							}
-							loop();
-						},1000);
-					},   
-				});
-				loop();
-			},1000);
-		},   
-	});
-	
+			if ((pixel[0] != pixel[1]) || (pixel[1] != pixel[2]))
+			{
+				is_gray = 0;
+			}
+
+			if ((is_bin == 0) && (is_gray == 0))
+			{
+				return 3;
+			}
+        }
+    }
+
 	if (is_bin == 1)
 	{
 		return 1;
@@ -140,18 +133,4 @@ function image_type (canvas1)
 		return 2;
 	}
 	return 3;
-}
-
-var asyncLoop = function(o)
-{
-    var i=-1,
-        length = o.length;
-    
-    var loop = function()
-	{
-        i++;
-        if(i==length){o.callback(); return;}
-        o.functionToLoop(loop, i);
-    } 
-    loop();
 }

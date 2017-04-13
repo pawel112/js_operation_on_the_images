@@ -740,7 +740,7 @@ function menu_o1()
     }
     else
     {
-        sum (number, image1, null);
+        sum (number, image1_a, null);
     }
 }
 
@@ -761,7 +761,7 @@ function menu_o2()
 
     else
     {
-        sum (0, image1, image2);
+        sum (0, image1_a, image2);
     }
 }
 
@@ -839,7 +839,7 @@ function menu_12()
     }
     else
     {
-        pow (number, image1);
+        pow (number, image1_a);
     }
 }
 
@@ -869,7 +869,7 @@ function menu_13()
     }
     else
     {
-        pow (number, image1);
+        pow (number, image1_a);
     }
 }
 
@@ -881,7 +881,7 @@ function menu_14()
     }
     else
     {
-        log (image1);
+        log (image1_a);
     }
 }
 

@@ -2,109 +2,89 @@
 function sum (number, canvas1, canvas2)
 {
     show_button_normalization (false);
-    
-    asyncLoop(
-	{
-		length : 5,
-		functionToLoop : function(loop, i){
-			setTimeout(function(){
-				asyncLoop(
-				{
-					length : 5,
-					functionToLoop : function(loop, i){
-						setTimeout(function(){
-							var pixel1 = get_pixel (i, j, canvas1);
-                            var pixel2;
+    var i, data, ctx, imgData, imgData1, data1;
+    ctx = canvas1.getContext ("2d");
+    imgData = ctx.getImageData (0, 0, canvas1.width, canvas1.height);
+    data = imgData.data;
 
-                            if (canvas2 != null)
-                            {
-                                pixel2 = get_pixel (i, j, canvas2);
-                            }
-                            else
-                            {
-                                pixel2 = new Array(4);
-                                pixel2[0] = number;
-                                pixel2[1] = number;
-                                pixel2[2] = number;
-                                pixel2[3] = number;
-                            }
-
-                            var pixel = new Array(4);
-                            pixel[0] = parseInt (parseInt (pixel1[0]*0.5) + parseInt (pixel2[0]*0.5));
-                            pixel[1] = parseInt (parseInt (pixel1[1]*0.5) + parseInt (pixel2[1]*0.5));
-                            pixel[2] = parseInt (parseInt (pixel1[2]*0.5) + parseInt (pixel2[2]*0.5));
-                            pixel[3] = parseInt (parseInt (pixel1[3]*0.5) + parseInt (pixel2[3]*0.5));
-
-                            set_pixel (i, j, image1_a, pixel[0], pixel[1], pixel[2], pixel[3]);
-							loop();
-						},1000);
-					},   
-				});
-				loop();
-			},1000);
-		},   
-	});
-    
-    
-    
-    /*for (var i=0; i<canvas1.width; i++)
-    {
-        for (var j=0; j<canvas1.height; j++)
+    if (canvas2 === null)
+    {             
+        i = data.length;
+        number *= 0.5;
+        while (i-- > 0)
         {
-            var pixel1 = get_pixel (i, j, canvas1);
-            var pixel2;
-
-            if (canvas2 != null)
-            {
-                pixel2 = get_pixel (i, j, canvas2);
-            }
-            else
-            {
-                pixel2 = new Array(4);
-                pixel2[0] = number;
-                pixel2[1] = number;
-                pixel2[2] = number;
-                pixel2[3] = number;
-            }
-
-            var pixel = new Array(4);
-            pixel[0] = parseInt (parseInt (pixel1[0]*0.5) + parseInt (pixel2[0]*0.5));
-            pixel[1] = parseInt (parseInt (pixel1[1]*0.5) + parseInt (pixel2[1]*0.5));
-            pixel[2] = parseInt (parseInt (pixel1[2]*0.5) + parseInt (pixel2[2]*0.5));
-            pixel[3] = parseInt (parseInt (pixel1[3]*0.5) + parseInt (pixel2[3]*0.5));
-
-            set_pixel (i, j, image1_a, pixel[0], pixel[1], pixel[2], pixel[3]);
+            data[i] = data[i] * 0.5 + number;
         }
-    }*/
-}
+    }
+    else
+    {
+        if (canvas1.width !== canvas2.width || canvas1.height !== canvas2.height)
+        {
+            throw new RangeError("Canvas size miss-match, can not process data as requested.");
+        }
+
+        data1 = canvas2.getContext ("2d").getImageData (0,0,canvas2.width, canvas2.height).data;
+        i = data.length;
+        while (i-- > 0)
+        {
+            data[i] = (data[i] + data1[i]) * 0.5;
+        }
+     }
+     ctx.putImageData (imgData, 0, 0);
+ }
 
 function pow (number, canvas1)
 {
     show_button_normalization (false);
-    for (var i=0; i<canvas1.width; i++)
+    var i, data, ctx, imgData, imgData1, data1;
+    ctx = canvas1.getContext ("2d");
+    imgData = ctx.getImageData (0, 0, canvas1.width, canvas1.height);
+    data = imgData.data;
+
+    i = data.length;
+    while (i-- > 0)
     {
-        for (var j=0; j<canvas1.height; j++)
-        {
-            var pixel = get_pixel (i, j, canvas1);
-            set_pixel (i, j, image1_a, Math.pow(pixel[0], number), Math.pow(pixel[1], number), Math.pow(pixel[2], number), pixel[3]);
-        }
+        data[i] = Math.pow (data[i], number);
     }
+
+    ctx.putImageData (imgData, 0, 0);
     show_button_normalization (true);
-}
+ }
 
 function log (canvas1)
 {
     show_button_normalization (false);
-    for (var i=0; i<canvas1.width; i++)
+    var i, data, ctx, imgData, imgData1, data1;
+    ctx = canvas1.getContext ("2d");
+    imgData = ctx.getImageData (0, 0, canvas1.width, canvas1.height);
+    data = imgData.data;
+
+    i = data.length;
+    while (i-- > 0)
     {
-        for (var j=0; j<canvas1.height; j++)
-        {
-            var pixel = get_pixel (i, j, canvas1);
-            set_pixel (i, j, image1_a, Math.log(pixel[0]), Math.log(pixel[1]), Math.log(pixel[2]), pixel[3]);
-        }
+        data[i] = Math.log (data[i]);
     }
+
+    ctx.putImageData (imgData, 0, 0);
     show_button_normalization (true);
+ }
+
+function arrayMin (arr)
+{
+    return arr.reduce(function (p, v)
+    {
+        return ( p < v ? p : v );
+    });
 }
+
+function arrayMax (arr)
+{
+    return arr.reduce(function (p, v)
+    {
+        return ( p > v ? p : v );
+    });
+}
+
 
 function normalization (canvas1)
 {
@@ -112,65 +92,23 @@ function normalization (canvas1)
     if (canvas1.width <= 0)
     {
         alert("The image is empty!");
-    }
-    else
-    {
-        log (image1);
+        return;
     }
     
-    var max = 0;
-    var min = 9999;
+    var i, data, ctx, imgData, imgData1, data1, min, max, temp1, temp2;
+    ctx = canvas1.getContext ("2d");
+    imgData = ctx.getImageData (0, 0, canvas1.width, canvas1.height);
+    data = imgData.data;
 
-    for (var i=0; i<canvas1.width; i++)
+    min = arrayMin (data);
+    max = arrayMax (data);
+    
+    i = data.length;
+    while (i-- > 0)
     {
-        for (var j=0; j<canvas1.height; j++)
-        {
-            var pixel = get_pixel (i, j, canvas1);
-
-            if (pixel[0] > max)
-            {
-                max = pixel[0];
-            }   
-            
-            if (pixel[1] > max)
-            {
-                max = pixel[1];
-            }
-            
-            if (pixel[2] > max)
-            {
-                max = pixel[2];
-            }
-
-            if (pixel[0] < min)
-            {
-                min = pixel[0];
-            }   
-            
-            if (pixel[1] < min)
-            {
-                min = pixel[1];
-            }
-            
-            if (pixel[2] < min)
-            {
-                min = pixel[2];
-            }
-        }
+        data[i] = ((255*data[i] - min)/(max - min));
     }
-
-    for (var i=0; i<canvas1.width; i++)
-    {
-        for (var j=0; j<canvas1.height; j++)
-        {
-            var pixel = get_pixel (i, j, canvas1);
-
-            pixel[0] = parseInt(255*(pixel[0] - min)/(max-min));
-            pixel[1] = parseInt(255*(pixel[1] - min)/(max-min));
-            pixel[2] = parseInt(255*(pixel[2] - min)/(max-min));
-            set_pixel (i, j, canvas1, pixel[0], pixel[1], pixel[2], pixel[3]);
-        }
-    }
+    ctx.putImageData (imgData, 0, 0);
 }
 
 //chapter 3
